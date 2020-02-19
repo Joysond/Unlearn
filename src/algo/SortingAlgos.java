@@ -8,7 +8,8 @@ public class SortingAlgos {
         // bubbleSort(array);
         // insertionSort(array);
         // selectionSort(array);
-        array = mergeSort(array);
+        // array = mergeSort(array);
+        quickSort(array, 0, array.length - 1);
         for(int ele : array) {
             System.out.println(ele);
         }
@@ -81,6 +82,37 @@ public class SortingAlgos {
             result[k++] = array2[j++];
         }
         return result;
+    }
+
+    private static void quickSort(int[] array, int low, int high) {
+        if(low < high) {
+            int pivotIndex = partition(array, low, high);
+            quickSort(array, low, pivotIndex - 1);
+            quickSort(array, pivotIndex + 1, high);
+        }
+    }
+
+    private static int partition(int[] array, int low, int high) {
+        System.out.println("Low >> " + low + " high > " + high);
+        int pivot = array[(low + high) / 2];
+        int lo = low - 1;
+        int hi = high + 1;
+        while(true) {
+            do {
+                lo++;
+            } while(array[lo] < pivot);
+            do {
+                hi--;
+            } while(array[hi] > pivot);
+            if(lo >= hi) {
+                System.out.println("High while returning >> " + hi);
+                return hi;
+            }
+            int temp = array[lo];
+            array[lo] = array[hi];
+            array[hi] = temp;
+        }
+
     }
 
 }
